@@ -94,7 +94,6 @@ img{
 }
 
 header nav{
-    max-width: 600px;
     margin: 75px auto;
     padding: 0 20px;
 }
@@ -128,6 +127,36 @@ header nav ul li.active a{
 header nav ul li:not(.active) a:hover{
     background: #272757;
     transform: scale(1.1);
+}
+
+header nav.nav-start{
+    display: flex;
+    align-items: center;
+}
+
+header nav.nav-start div#time,
+header nav.nav-start p#greeting{
+    flex: 0 0 auto;
+}
+
+header nav.nav-start ul{
+    flex: 1;
+}
+
+header nav.nav-start div#time{
+    font-weight: 800;
+    font-size: 50px;
+    text-align: center;
+    padding: 10px 25px;
+    border: 3px solid #272757;
+    margin: 15px 0 15px 15px;
+    min-width: 260px;
+}
+
+header nav.nav-start p#greeting{
+    font-weight: 800;
+    font-size: 25px;
+    padding: 10px 25px;
 }
 
 
