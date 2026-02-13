@@ -77,6 +77,23 @@ img{
     text-align: center;
 }
 
+.language-container{
+    flex: 0 0 auto;
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+}
+
+#enBtn, #deBtn{
+    flex: 1;
+    border: none;
+}
+
+#enBtn img, #deBtn img{
+    width: 50px;
+    height: 35px;
+}
+
 header nav{
     max-width: 600px;
     margin: 75px auto;
@@ -201,7 +218,7 @@ main{
     display: grid;
     align-items: center;
     gap: 50px;
-    padding: 0 20px 20px 20px;
+    padding: 40px;
     margin: 0 auto;
     max-width: 1200px;
     background: #E3DDDB;
@@ -224,5 +241,3 @@ footer{
     box-shadow: 0 0 10px #5A4A40;
     transform: scale(1.05);
 }
-
-#enBtn
