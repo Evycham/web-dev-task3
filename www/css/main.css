@@ -150,7 +150,7 @@ main{
     border: 2px solid #5A4A40;
 }
 
-.clock:hover, .worker:hover{
+.worker:hover{
     box-shadow: 0 0 10px #5A4A40;
     transform: scale(1.05);
 }
@@ -224,3 +224,5 @@ footer{
     box-shadow: 0 0 10px #5A4A40;
     transform: scale(1.05);
 }
+
+#enBtn
