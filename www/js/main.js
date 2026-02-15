@@ -37,7 +37,7 @@ let currentLang = "de";
 
 updateClock();
 setInterval(updateClock, 1_000);
-createBubbles();
+createBubble();
 
 startAutoHighlight();
 
@@ -171,17 +171,44 @@ function generateStats(){
     };
 }
 
-function createBubbles(){
+function createBubble(){
     const values = generateStats();
     const bubble = document.createElement("div");
     scene.appendChild(bubble);
     bubble.classList.add("bubbles");
+    bubble.classList.add("create");
     bubble.style.width = values.size + "px";
     bubble.style.height = values.size + "px";
     bubble.style.left = values.x + "px";
     bubble.style.top = values.y + "px";
     bubble.style.backgroundColor = `hsla(${values.h}, ${values.s}%, ${values.l}%, ${values.a})`;
+    popBubble(bubble);
 }
+
+function popBubble(_bubble){
+    _bubble.addEventListener("click", () => {
+        _bubble.classList.add("pop");
+    });
+    _bubble.addEventListener("animationend", (event) => {
+        if(event.animationName === "pop"){
+            scene.removeChild(_bubble);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
