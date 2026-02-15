@@ -139,3 +139,20 @@ function highlightSetter(_ix){
 function highlightRemove(){
     clocks.forEach(c => c.classList.remove("highlight"));
 }
+
+/**
+ * Problem3 (bobbles)
+ **/
+function generateBubbles(){
+
+}
+
+
+
+
+
+
+
+
+
+
