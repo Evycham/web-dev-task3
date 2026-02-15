@@ -292,6 +292,7 @@ footer{
     inset: 0;
     pointer-events: none;
     z-index: 9999;
+    overflow: hidden;
 }
 
 .bubbles{
@@ -341,4 +342,21 @@ footer{
 
 .logo-container.hidden{
     transform: translateY(-100%);
+}
+
+.float{
+    --drift: 0px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        transform: translate(0, 0);
+    }
+    50%{
+        transform: translate(var(--drift), -50vh);
+    }
+    100%{
+        transform: translate(calc(var(--drift) * -1), -120vh);
+    }
 }

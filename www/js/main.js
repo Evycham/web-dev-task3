@@ -40,7 +40,7 @@ let lastScrollY = window.scrollY;
 updateClock();
 setInterval(updateClock, 1_000);
 
-setInterval(createBubble, 10_000);
+setInterval(createBubble, 250);
 
 startAutoHighlight();
 
@@ -167,14 +167,16 @@ function generateStats(){
     // Position
     let size = Math.floor(50 + Math.random() * (100 - 50));
     let x = Math.floor(Math.random() * (scene.clientWidth - size));
-    let y = Math.floor(Math.random() * (scene.clientHeight- size));
+    let y = scene.clientHeight + size;
     // Color
     let h = Math.random() * 360;
     let s = Math.floor(60 + Math.random() * (80 - 60));
     let l = Math.floor(60 + Math.random() * (80 - 60));
     let a = 0.2 + Math.random() * (0.5 - 0.2);
     // Timer
-    let time = Math.floor(10 + Math.random() * (120 - 10));
+    let time = Math.floor(10 + Math.random() * (30 - 10));
+    // Bewegung
+    let drift = Math.floor(10 + Math.random() * (40 - 10));
     // Result
     return {
         size: size,
@@ -184,15 +186,25 @@ function generateStats(){
         s: s,
         l: l,
         a: a,
-        time: time * 1000
+        time: time * 1000,
+        drift: drift,
     };
 }
 
 function createBubble(){
     const values = generateStats();
     const bubble = document.createElement("div");
+    const wrapper = document.createElement("div");
 
-    scene.appendChild(bubble);
+    wrapper.appendChild(bubble);
+    scene.appendChild(wrapper);
+
+    wrapper.style.width = values.size + "px";
+    wrapper.style.height = values.size + "px";
+    wrapper.style.animationDuration = values.time + "ms";
+    // hier --drift ist eine Variable aus CSS, so definiert man eine : --name: wert;
+    wrapper.style.setProperty("--drift", values.drift + "px");
+    wrapper.classList.add("float");
 
     bubble.classList.add("bubbles");
     bubble.classList.add("create");
@@ -214,7 +226,7 @@ function createBubble(){
 function popBubble(_bubble){
     // if clicked - add animation
     _bubble.addEventListener("click", () => {
-        if(!_bubble.classList.contains("bubble")){
+        if(!_bubble.classList.contains("pop")){
             _bubble.classList.add("pop");
         }
     });
