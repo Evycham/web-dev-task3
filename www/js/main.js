@@ -237,4 +237,3 @@ function popBubble(_bubble){
         }
     });
 }
-
