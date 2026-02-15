@@ -159,6 +159,8 @@ function generateStats(){
     let s = Math.floor(60 + Math.random() * (80 - 60));
     let l = Math.floor(60 + Math.random() * (80 - 60));
     let a = 0.2 + Math.random() * (0.5 - 0.2);
+    // Timer
+    let time = Math.floor(30 + Math.random() * (120 - 30));
     // Result
     return {
         size: size,
@@ -167,14 +169,17 @@ function generateStats(){
         h: h,
         s: s,
         l: l,
-        a: a
+        a: a,
+        time: time * 1000
     };
 }
 
 function createBubble(){
     const values = generateStats();
     const bubble = document.createElement("div");
+
     scene.appendChild(bubble);
+
     bubble.classList.add("bubbles");
     bubble.classList.add("create");
     bubble.style.width = values.size + "px";
@@ -182,19 +187,32 @@ function createBubble(){
     bubble.style.left = values.x + "px";
     bubble.style.top = values.y + "px";
     bubble.style.backgroundColor = `hsla(${values.h}, ${values.s}%, ${values.l}%, ${values.a})`;
+    // set 2 events: if clicked -> animation; if animated -> drop;
     popBubble(bubble);
+    // set timer if it's stil not animated and removed -> add animation;
+    setTimeout(() => {
+        if(!bubble.classList.contains("pop")){
+            bubble.classList.add("pop");
+        }
+    }, values.time);
 }
 
 function popBubble(_bubble){
+    // if clicked - add animation
     _bubble.addEventListener("click", () => {
-        _bubble.classList.add("pop");
+        if(!_bubble.classList.contains("bubble")){
+            _bubble.classList.add("pop");
+        }
     });
+    // remove after animation
     _bubble.addEventListener("animationend", (event) => {
         if(event.animationName === "pop"){
-            scene.removeChild(_bubble);
+            _bubble.remove();
         }
     });
 }
+
+
 
 
 
