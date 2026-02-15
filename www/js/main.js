@@ -30,16 +30,31 @@ const clocks = document.querySelectorAll(".clock");
 const enBtn = document.getElementById("enBtn");
 const deBtn = document.getElementById("deBtn");
 const scene = document.getElementById("scene");
+const headerBar = document.getElementsByClassName("logo-container")[0];
 
 let ix = 0;
 let timerId = null;
 let currentLang = "de";
+let lastScrollY = window.scrollY;
 
 updateClock();
 setInterval(updateClock, 1_000);
-createBubble();
+
+setInterval(createBubble, 10_000);
 
 startAutoHighlight();
+
+window.addEventListener("scroll", () => {
+   const newScrollY = window.scrollY;
+
+   if(newScrollY > lastScrollY) {
+       headerBar.classList.add("hidden");
+   } else if(newScrollY < lastScrollY) {
+       headerBar.classList.remove("hidden");
+   }
+
+    lastScrollY = newScrollY;
+});
 
 clocks.forEach((clock, index) => {
     clock.addEventListener("mouseenter", () => {
@@ -53,7 +68,6 @@ clocks.forEach((clock, index) => {
         startAutoHighlight();
     })
 });
-
 
 /**
  * Sprachauswahl
@@ -160,7 +174,7 @@ function generateStats(){
     let l = Math.floor(60 + Math.random() * (80 - 60));
     let a = 0.2 + Math.random() * (0.5 - 0.2);
     // Timer
-    let time = Math.floor(30 + Math.random() * (120 - 30));
+    let time = Math.floor(10 + Math.random() * (120 - 10));
     // Result
     return {
         size: size,
@@ -211,29 +225,4 @@ function popBubble(_bubble){
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -17,6 +17,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 70px;
 }
 
 /*
@@ -47,6 +48,15 @@ img{
     width: 100%;
     margin: 0;
     padding: 15px;
+
+    /* smooth */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateY(0);
+    transition: transform 250ms ease;
 }
 
 /* can't growth, a size of the container - automatik*/
@@ -327,4 +337,8 @@ footer{
 
 .bubbles.pop{
     animation: pop 300ms ease forwards;
+}
+
+.logo-container.hidden{
+    transform: translateY(-100%);
 }
