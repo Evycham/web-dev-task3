@@ -1,8 +1,8 @@
 "use strict";
 
 /**
- * Language-choise
- * **/
+ * Language-map
+ **/
 const translations = {
     de: {
         morning: "Guten Morgen und ",
@@ -29,6 +29,7 @@ const greetingZone = document.getElementById("greeting");
 const clocks = document.querySelectorAll(".clock");
 const enBtn = document.getElementById("enBtn");
 const deBtn = document.getElementById("deBtn");
+const scene = document.getElementById("scene");
 
 let ix = 0;
 let timerId = null;
@@ -36,6 +37,7 @@ let currentLang = "de";
 
 updateClock();
 setInterval(updateClock, 1_000);
+createBubbles();
 
 startAutoHighlight();
 
@@ -52,6 +54,10 @@ clocks.forEach((clock, index) => {
     })
 });
 
+
+/**
+ * Sprachauswahl
+ **/
 enBtn.addEventListener("click", () => {
     if (currentLang === "en") {
         return;
@@ -141,10 +147,40 @@ function highlightRemove(){
 }
 
 /**
- * Problem3 (bobbles)
+ * Problem3 (bubbles)
  **/
-function generateBubbles(){
+function generateStats(){
+    // Position
+    let size = Math.floor(50 + Math.random() * (100 - 50));
+    let x = Math.floor(Math.random() * (scene.clientWidth - size));
+    let y = Math.floor(Math.random() * (scene.clientHeight- size));
+    // Color
+    let h = Math.random() * 360;
+    let s = Math.floor(60 + Math.random() * (80 - 60));
+    let l = Math.floor(60 + Math.random() * (80 - 60));
+    let a = 0.2 + Math.random() * (0.5 - 0.2);
+    // Result
+    return {
+        size: size,
+        x: x,
+        y: y,
+        h: h,
+        s: s,
+        l: l,
+        a: a
+    };
+}
 
+function createBubbles(){
+    const values = generateStats();
+    const bubble = document.createElement("div");
+    scene.appendChild(bubble);
+    bubble.classList.add("bubbles");
+    bubble.style.width = values.size + "px";
+    bubble.style.height = values.size + "px";
+    bubble.style.left = values.x + "px";
+    bubble.style.top = values.y + "px";
+    bubble.style.backgroundColor = `hsla(${values.h}, ${values.s}%, ${values.l}%, ${values.a})`;
 }
 
 

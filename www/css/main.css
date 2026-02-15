@@ -276,10 +276,16 @@ footer{
 /*
 * Bubbles
 */
+#scene{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
 .bubbles{
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(#0fff2b, #00e2ff);
-    opacity: 30%;
-    box-shadow: 0 0 10px #00ffcc;
+    border: none;
+    pointer-events: auto;
 }
